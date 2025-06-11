@@ -39,6 +39,16 @@
     <link rel="icon" type="image/svg+xml" href="favicon-full.svg">
     <link rel="manifest" href="site.webmanifest">
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQ0X09DDKN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GQ0X09DDKN');
+    </script>
+
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         * {
@@ -734,6 +744,181 @@
             document.querySelectorAll('.platform-btn').forEach(btn => {
                 btn.target = '_blank';
                 btn.rel = 'noopener noreferrer';
+            });
+
+            // Google Analytics event tracking
+            function trackEvent(eventName, eventCategory, eventLabel) {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', eventName, {
+                        event_category: eventCategory,
+                        event_label: eventLabel
+                    });
+                }
+            }
+
+            // Track consultation booking clicks
+            const consultationBtn = document.querySelector('a[href*="cal.com"]');
+            if (consultationBtn) {
+                consultationBtn.addEventListener('click', function() {
+                    trackEvent('click', 'CTA', 'Book Consultation');
+                });
+            }
+
+            // Track LinkedIn profile clicks
+            const linkedinProfileBtn = document.querySelector('a[href*="linkedin.com/in/saadiq"]');
+            if (linkedinProfileBtn) {
+                linkedinProfileBtn.addEventListener('click', function() {
+                    trackEvent('click', 'Social', 'LinkedIn Profile');
+                });
+            }
+
+            // Track source link clicks
+            const sourceLink = document.querySelector('.source-link');
+            if (sourceLink) {
+                sourceLink.addEventListener('click', function() {
+                    trackEvent('click', 'External', 'WSJ Source');
+                });
+            }
+
+            // Track brand link clicks
+            const brandLink = document.querySelector('.brand-mark a');
+            if (brandLink) {
+                brandLink.addEventListener('click', function() {
+                    trackEvent('click', 'Brand', 'saadiq.xyz');
+                });
+            }
+
+            // Track share modal open
+            shareBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                trackEvent('click', 'Share', 'Open Share Modal');
+                shareModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Track platform share clicks
+            document.getElementById('linkedinShare').addEventListener('click', function() {
+                trackEvent('click', 'Share', 'LinkedIn Share');
+            });
+
+            document.getElementById('twitterShare').addEventListener('click', function() {
+                trackEvent('click', 'Share', 'X Share');
+            });
+
+            document.getElementById('threadsShare').addEventListener('click', function() {
+                trackEvent('click', 'Share', 'Threads Share');
+            });
+
+            // Additional tracking recommendations
+
+            // 1. Scroll depth tracking
+            let scrollDepths = [25, 50, 75, 90, 100];
+            let scrollDepthTriggered = {};
+            
+            function trackScrollDepth() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+                
+                scrollDepths.forEach(depth => {
+                    if (scrollPercent >= depth && !scrollDepthTriggered[depth]) {
+                        scrollDepthTriggered[depth] = true;
+                        trackEvent('scroll_depth', 'Engagement', `${depth}% Scrolled`);
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', trackScrollDepth);
+
+            // 2. Time on page milestones
+            const timeOnPageMilestones = [30, 60, 120, 300]; // seconds
+            let timeOnPageTriggered = {};
+            
+            timeOnPageMilestones.forEach(seconds => {
+                setTimeout(() => {
+                    if (!timeOnPageTriggered[seconds]) {
+                        timeOnPageTriggered[seconds] = true;
+                        trackEvent('time_on_page', 'Engagement', `${seconds}s on page`);
+                    }
+                }, seconds * 1000);
+            });
+
+            // 3. Step hover tracking (engagement with content)
+            document.querySelectorAll('.step').forEach((step, index) => {
+                let hoverTracked = false;
+                step.addEventListener('mouseenter', function() {
+                    if (!hoverTracked) {
+                        hoverTracked = true;
+                        const stepTitle = step.querySelector('.step-title').textContent;
+                        trackEvent('hover', 'Content', `Step ${index + 1}: ${stepTitle}`);
+                    }
+                });
+            });
+
+            // 4. Key insight visibility tracking
+            const keyInsight = document.querySelector('.key-insight');
+            if (keyInsight) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            trackEvent('view', 'Content', 'Key Insight Viewed');
+                            observer.unobserve(keyInsight); // Track only once
+                        }
+                    });
+                }, { threshold: 0.5 });
+                observer.observe(keyInsight);
+            }
+
+            // 5. CTA section visibility tracking
+            const ctaSection = document.querySelector('.cta-section');
+            if (ctaSection) {
+                const ctaObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            trackEvent('view', 'Content', 'CTA Section Viewed');
+                            ctaObserver.unobserve(ctaSection); // Track only once
+                        }
+                    });
+                }, { threshold: 0.3 });
+                ctaObserver.observe(ctaSection);
+            }
+
+            // 6. Modal close tracking (without sharing)
+            closeModal.addEventListener('click', function() {
+                trackEvent('click', 'Share', 'Modal Closed Without Sharing');
+                shareModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+
+            // 7. Text selection tracking (high engagement indicator)
+            let selectionTracked = false;
+            document.addEventListener('mouseup', function() {
+                const selectedText = window.getSelection().toString().trim();
+                if (selectedText.length > 20 && !selectionTracked) {
+                    selectionTracked = true;
+                    trackEvent('text_selection', 'Engagement', 'Content Selected');
+                }
+            });
+
+            // 8. Page focus/blur tracking (tab switching)
+            let pageBlurred = false;
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden && !pageBlurred) {
+                    pageBlurred = true;
+                    trackEvent('page_visibility', 'Engagement', 'Page Lost Focus');
+                } else if (!document.hidden && pageBlurred) {
+                    trackEvent('page_visibility', 'Engagement', 'Page Regained Focus');
+                }
+            });
+
+            // 9. Print intent tracking
+            window.addEventListener('beforeprint', function() {
+                trackEvent('action', 'Engagement', 'Print Attempted');
+            });
+
+            // 10. Error tracking
+            window.addEventListener('error', function(e) {
+                trackEvent('javascript_error', 'Technical', `${e.message} - ${e.filename}:${e.lineno}`);
             });
         });
     </script>
