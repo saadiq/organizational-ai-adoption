@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Move Your Team from AI Fear to AI Fluency</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
+    <link rel="icon" type="image/svg+xml" href="favicon-full.svg">
+    <link rel="manifest" href="site.webmanifest">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #ffffff;
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        .infographic {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+            position: relative;
+        }
+
+        .infographic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header {
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-badge {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            color: #7dd3fc;
+        }
+
+        .source-link {
+            display: block;
+            font-size: 0.7rem;
+            color: #64748b;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .source-link:hover {
+            color: #93c5fd;
+        }
+
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .steps-grid {
+            padding: 0 1.5rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .step:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-icon {
+            margin-right: 1rem;
+            color: #93c5fd;
+        }
+
+        .step-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .step-description {
+            color: #cbd5e1;
+            font-size: 1rem;
+            padding-left: 3.5rem;
+        }
+
+        .key-insight {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .key-insight-icon {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            color: #10b981;
+        }
+
+        .key-insight-icon svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .key-insight-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .cta-section {
+            background: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid rgba(71, 85, 105, 0.3);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-text {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #93c5fd;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .share-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .share-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .brand-mark {
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            z-index: 3;
+        }
+
+        @media (max-width: 640px) {
+            .header {
+                padding: 2rem 1.5rem 1.5rem;
+            }
+            
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .steps-grid {
+                padding: 0 1rem 1.5rem;
+            }
+            
+            .step {
+                padding: 1.25rem;
+            }
+            
+            .step-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .step-number {
+                margin-right: 0.75rem;
+            }
+            
+            .step-description {
+                padding-left: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn {
+                width: 200px;
+            }
+        }
+
+        /* Scroll animations */
+        .step {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+        .step:nth-child(4) { animation-delay: 0.4s; }
+        .step:nth-child(5) { animation-delay: 0.5s; }
+        .step:nth-child(6) { animation-delay: 0.6s; }
+        .step:nth-child(7) { animation-delay: 0.7s; }
+        .step:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <div class="header">
+            <div class="stat-badge">78% of organizations use AI in at least one function—up from 55% in 2023</div>
+            <a href="https://www.wsj.com/articles/companies-are-struggling-to-drive-a-return-on-ai-it-doesnt-have-to-be-that-way-f3d697aa" target="_blank" class="source-link">Source: Wall Street Journal</a>
+            <h1 class="main-title">How to Move Your Team from AI Fear to AI Fluency</h1>
+            <p class="subtitle">A practical roadmap for transformation</p>
+        </div>
+        
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i data-lucide="target"></i></div>
+                    <div class="step-title">Set Clear Goals</div>
+                </div>
+                <div class="step-description">You can't craft a plan without knowing your destination.</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i data-lucide="shield-check"></i></div>
+                    <div class="step-title">Create a Data Policy</div>
+                </div>
+                <div class="step-description">Establish guardrails that address employee anxieties about AI use.</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i data-lucide="users"></i></div>
+                    <div class="step-title">Leadership Models the Way</div>
+                </div>
+                <div class="step-description">Teams follow what leadership demonstrates, not what they announce.</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-icon"><i data-lucide="star"></i></div>
+                    <div class="step-title">Identify Department Champions</div>
+                </div>
+                <div class="step-description">Find AI enthusiasts who understand both technology and your processes.</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div class="step-icon"><i data-lucide="lightbulb"></i></div>
+                    <div class="step-title">Create "Aha Moments"</div>
+                </div>
+                <div class="step-description">Help everyone experience AI's real value in their daily work.</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <div class="step-icon"><i data-lucide="share-2"></i></div>
+                    <div class="step-title">Build Knowledge Sharing Systems</div>
+                </div>
+                <div class="step-description">Scale individual AI discoveries into organization-wide practices.</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <div class="step-icon"><i data-lucide="settings"></i></div>
+                    <div class="step-title">Automate Key Processes</div>
+                </div>
+                <div class="step-description">Identify repetitive workflows and implement AI-powered solutions.</div>
+            </div>
+
+            <div class="step">
+                <div class="step-header">
+                    <div class="step-number">8</div>
+                    <div class="step-icon"><i data-lucide="rocket"></i></div>
+                    <div class="step-title">Build AI-Native Products</div>
+                </div>
+                <div class="step-description">Integrate AI capabilities into new and existing offerings.</div>
+            </div>
+        </div>
+
+        <div class="key-insight">
+            <div class="key-insight-icon"><i data-lucide="compass"></i></div>
+            <div class="key-insight-text">Ready to move from fear to fluency? Get expert guidance for your AI transformation.</div>
+        </div>
+
+        <div class="cta-section">
+            <p class="cta-text">Need help implementing this framework? I provide coaching, workshops, and automation to make AI accessible for your organization.</p>
+            <div class="share-buttons">
+                <a href="#" class="share-btn">
+                    <i data-lucide="phone"></i>
+                    Book a Consultation
+                </a>
+                <a href="#" class="share-btn">
+                    <i data-lucide="book-open"></i>
+                    Learn About Workshops
+                </a>
+                <a href="#" class="share-btn">
+                    <i data-lucide="share"></i>
+                    Share This Framework
+                </a>
+            </div>
+        </div>
+
+        <div class="brand-mark">Saadiq.xyz</div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
