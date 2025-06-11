@@ -359,6 +359,155 @@
                 transform: translateY(0);
             }
         }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            margin: 10% auto;
+            padding: 0;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .close {
+            color: #94a3b8;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #ffffff;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-body p {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .share-platforms {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .platform-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .platform-btn.linkedin {
+            background: rgba(10, 102, 194, 0.2);
+            color: #60a5fa;
+            border-color: rgba(10, 102, 194, 0.3);
+        }
+
+        .platform-btn.linkedin:hover {
+            background: rgba(10, 102, 194, 0.3);
+            border-color: rgba(10, 102, 194, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .platform-btn.twitter {
+            background: rgba(29, 161, 242, 0.2);
+            color: #60a5fa;
+            border-color: rgba(29, 161, 242, 0.3);
+        }
+
+        .platform-btn.twitter:hover {
+            background: rgba(29, 161, 242, 0.3);
+            border-color: rgba(29, 161, 242, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .platform-btn.threads {
+            background: rgba(101, 119, 134, 0.2);
+            color: #94a3b8;
+            border-color: rgba(101, 119, 134, 0.3);
+        }
+
+        .platform-btn.threads:hover {
+            background: rgba(101, 119, 134, 0.3);
+            border-color: rgba(101, 119, 134, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .platform-btn i,
+        .platform-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .modal-content {
+                margin: 15% auto;
+                width: 95%;
+            }
+            
+            .modal-header {
+                padding: 1.25rem 1.25rem 0.75rem;
+            }
+            
+            .modal-body {
+                padding: 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -460,7 +609,7 @@
                     <i data-lucide="book-open"></i>
                     Learn About Workshops
                 </a>
-                <a href="#" class="share-btn">
+                <a href="#" class="share-btn" id="shareBtn">
                     <i data-lucide="share"></i>
                     Share This Framework
                 </a>
@@ -470,12 +619,96 @@
         <div class="brand-mark">Saadiq.xyz</div>
     </div>
 
+    <!-- Share Modal -->
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share This Framework</h3>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Help others transform their organizations from AI fear to AI fluency!</p>
+                <div class="share-platforms">
+                    <a href="#" class="platform-btn linkedin" id="linkedinShare">
+                        <i data-lucide="linkedin"></i>
+                        <span>Share on LinkedIn</span>
+                    </a>
+                    <a href="#" class="platform-btn twitter" id="twitterShare">
+                        <i data-lucide="twitter"></i>
+                        <span>Share on Twitter</span>
+                    </a>
+                    <a href="#" class="platform-btn threads" id="threadsShare">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.31v-.017c-.024-3.581 1.205-6.334 3.509-8.184C7.06 2.35 9.914 1.5 13.19 1.5h.017c3.581.024 6.334 1.205 8.184 3.509C23.05 7.06 23.9 9.914 23.9 13.19v.017c.024 3.581-1.205 6.334-3.509 8.184C18.34 23.05 15.486 23.9 12.21 23.9h-.024zm2.78-9.72c-.877-.19-1.69-.44-2.43-.74-.44-.18-.84-.38-1.21-.59-.83-.47-1.42-1.09-1.77-1.84-.35-.75-.52-1.6-.52-2.55 0-.95.17-1.8.52-2.55.35-.75.84-1.37 1.47-1.86.63-.49 1.38-.87 2.25-1.14.87-.27 1.82-.4 2.85-.4.77 0 1.5.08 2.19.25.69.17 1.32.42 1.89.76.57.34 1.06.76 1.47 1.27.41.51.72 1.09.93 1.74h-2.17c-.18-.41-.44-.76-.78-1.05-.34-.29-.73-.51-1.17-.66-.44-.15-.92-.23-1.44-.23-.69 0-1.29.13-1.8.4-.51.27-.9.64-1.17 1.11-.27.47-.4 1.01-.4 1.62 0 .61.13 1.15.4 1.62.27.47.66.84 1.17 1.11.51.27 1.11.4 1.8.4.52 0 1-.08 1.44-.23.44-.15.83-.37 1.17-.66.34-.29.6-.64.78-1.05h2.17c-.21.65-.52 1.23-.93 1.74-.41.51-.9.93-1.47 1.27-.57.34-1.2.59-1.89.76-.69.17-1.42.25-2.19.25-1.03 0-1.98-.13-2.85-.4z"/>
+                        </svg>
+                        <span>Share on Threads</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Initialize Lucide icons when the page loads
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
+
+            // Modal functionality
+            const shareBtn = document.getElementById('shareBtn');
+            const shareModal = document.getElementById('shareModal');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Share URLs and text
+            const pageUrl = encodeURIComponent(window.location.href);
+            const shareText = encodeURIComponent('🚀 Transform your team from AI fear to AI fluency with this practical 8-step roadmap! 78% of organizations now use AI - is your team ready? Check out this framework:');
+            const shortText = encodeURIComponent('Transform your team from AI fear to AI fluency! 🚀');
+            
+            // Platform share URLs
+            const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
+            const threadsUrl = `https://www.threads.net/intent/post?text=${shortText} ${pageUrl}`;
+            
+            // Set share URLs
+            document.getElementById('linkedinShare').href = linkedinUrl;
+            document.getElementById('twitterShare').href = twitterUrl;
+            document.getElementById('threadsShare').href = threadsUrl;
+            
+            // Open modal
+            shareBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                shareModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close modal
+            closeModal.addEventListener('click', function() {
+                shareModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === shareModal) {
+                    shareModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && shareModal.style.display === 'block') {
+                    shareModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Add target="_blank" to platform buttons for external links
+            document.querySelectorAll('.platform-btn').forEach(btn => {
+                btn.target = '_blank';
+                btn.rel = 'noopener noreferrer';
+            });
         });
     </script>
 </body>
