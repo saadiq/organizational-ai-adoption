@@ -488,10 +488,15 @@
         }
 
         .platform-btn i,
-        .platform-btn svg {
+        .platform-btn svg,
+        .platform-btn img {
             width: 20px;
             height: 20px;
             flex-shrink: 0;
+        }
+
+        .platform-btn img {
+            filter: none;
         }
 
         @media (max-width: 640px) {
@@ -638,9 +643,7 @@
                         <span>Share on Twitter</span>
                     </a>
                     <a href="#" class="platform-btn threads" id="threadsShare">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.5 12.31v-.017c-.024-3.581 1.205-6.334 3.509-8.184C7.06 2.35 9.914 1.5 13.19 1.5h.017c3.581.024 6.334 1.205 8.184 3.509C23.05 7.06 23.9 9.914 23.9 13.19v.017c.024 3.581-1.205 6.334-3.509 8.184C18.34 23.05 15.486 23.9 12.21 23.9h-.024zm2.78-9.72c-.877-.19-1.69-.44-2.43-.74-.44-.18-.84-.38-1.21-.59-.83-.47-1.42-1.09-1.77-1.84-.35-.75-.52-1.6-.52-2.55 0-.95.17-1.8.52-2.55.35-.75.84-1.37 1.47-1.86.63-.49 1.38-.87 2.25-1.14.87-.27 1.82-.4 2.85-.4.77 0 1.5.08 2.19.25.69.17 1.32.42 1.89.76.57.34 1.06.76 1.47 1.27.41.51.72 1.09.93 1.74h-2.17c-.18-.41-.44-.76-.78-1.05-.34-.29-.73-.51-1.17-.66-.44-.15-.92-.23-1.44-.23-.69 0-1.29.13-1.8.4-.51.27-.9.64-1.17 1.11-.27.47-.4 1.01-.4 1.62 0 .61.13 1.15.4 1.62.27.47.66.84 1.17 1.11.51.27 1.11.4 1.8.4.52 0 1-.08 1.44-.23.44-.15.83-.37 1.17-.66.34-.29.6-.64.78-1.05h2.17c-.21.65-.52 1.23-.93 1.74-.41.51-.9.93-1.47 1.27-.57.34-1.2.59-1.89.76-.69.17-1.42.25-2.19.25-1.03 0-1.98-.13-2.85-.4z"/>
-                        </svg>
+                        <img src="Threads-Brand-Resource-Center/01 White/Logo/threads-logo-white.svg" alt="Threads" width="20" height="20">
                         <span>Share on Threads</span>
                     </a>
                 </div>
@@ -662,13 +665,13 @@
             
             // Share URLs and text
             const pageUrl = encodeURIComponent(window.location.href);
-            const shareText = encodeURIComponent('🚀 Transform your team from AI fear to AI fluency with this practical 8-step roadmap! 78% of organizations now use AI - is your team ready? Check out this framework:');
-            const shortText = encodeURIComponent('Transform your team from AI fear to AI fluency! 🚀');
+            const shareText = encodeURIComponent('Transform your team from AI fear to AI fluency with this practical 8-step roadmap! 78% of organizations now use AI - is your team ready?');
+            const shortText = encodeURIComponent('Transform your team from AI fear to AI fluency!');
             
             // Platform share URLs
             const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${pageUrl}`;
-            const threadsUrl = `https://www.threads.net/intent/post?text=${shortText} ${pageUrl}`;
+            const threadsUrl = `https://www.threads.net/intent/post?text=${shareText} ${pageUrl}`;
             
             // Set share URLs
             document.getElementById('linkedinShare').href = linkedinUrl;
