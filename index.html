@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://saadiq.github.io/organizational-ai-adoption/">
     <meta property="og:title" content="How to Move Your Team from AI Fear to AI Fluency">
     <meta property="og:description" content="A practical 8-step roadmap to transform your organization from AI anxiety to AI mastery. 78% of organizations now use AI—learn how to guide your team through successful adoption.">
-    <meta property="og:image" content="https://saadiq.github.io/organizational-ai-adoption/ai-adoption-preview.png">
+    <meta property="og:image" content="https://saadiq.github.io/organizational-ai-adoption/assets/images/ai-adoption-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="saadiq.github.io">
@@ -20,7 +20,7 @@
     <meta property="twitter:url" content="https://saadiq.github.io/organizational-ai-adoption/">
     <meta property="twitter:title" content="How to Move Your Team from AI Fear to AI Fluency">
     <meta property="twitter:description" content="A practical 8-step roadmap to transform your organization from AI anxiety to AI mastery. 78% of organizations now use AI—learn how to guide your team through successful adoption.">
-    <meta property="twitter:image" content="https://saadiq.github.io/organizational-ai-adoption/ai-adoption-preview.png">
+    <meta property="twitter:image" content="https://saadiq.github.io/organizational-ai-adoption/assets/images/ai-adoption-preview.png">
     <meta property="twitter:creator" content="@saadiqm">
     <meta property="twitter:site" content="@saadiqm">
     
@@ -31,15 +31,15 @@
     <link rel="canonical" href="https://saadiq.github.io/organizational-ai-adoption/">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/icons/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
     <link rel="manifest" href="site.webmanifest">
     
     <!-- Google tag (gtag.js) -->
@@ -150,6 +150,7 @@
             position: relative;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            cursor: pointer;
         }
 
         .step:hover {
@@ -209,6 +210,14 @@
             text-align: center;
             position: relative;
             z-index: 2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .key-insight:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .key-insight-icon {
@@ -811,6 +820,24 @@
             document.getElementById('threadsShare').addEventListener('click', function() {
                 trackEvent('click', 'Share', 'Threads Share');
             });
+
+            // Add click handlers for steps to navigate to blog post
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.addEventListener('click', function() {
+                    const stepTitle = step.querySelector('.step-title').textContent;
+                    trackEvent('click', 'Navigation', `Step ${index + 1}: ${stepTitle} - To Blog`);
+                    window.open('https://saadiq.xyz/how-to-move-your-team-from-ai-fear-to-ai-fluency/', '_blank');
+                });
+            });
+
+            // Add click handler for key insight to navigate to LinkedIn
+            const keyInsightSection = document.querySelector('.key-insight');
+            if (keyInsightSection) {
+                keyInsightSection.addEventListener('click', function() {
+                    trackEvent('click', 'Navigation', 'Key Insight - To LinkedIn');
+                    window.open('https://www.linkedin.com/in/saadiq/', '_blank');
+                });
+            }
 
             // Additional tracking recommendations
 
